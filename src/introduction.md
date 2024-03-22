@@ -30,6 +30,6 @@ Thank you for your contribution!
 
 ## Contact
 
-If you have any questions or suggestions, feel free to reach out to us through the [issues](https://github.com/your-username/photo-voyage-translations/issues).
+If you have any questions or suggestions, feel free to reach out to us through the [issues](https://github.com/PhotoVoyage/PhotoVoyage-languages/issues/new).
 
 We look forward to your contributions!
