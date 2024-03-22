@@ -9,8 +9,8 @@ class LanguageDownloadWindow(QDialog):
 
         layout = QVBoxLayout(self)
 
-        label = QLabel("Select language to download:")
-        layout.addWidget(label)
+        self.label = QLabel("Select language to download:")
+        layout.addWidget(self.label)
 
         self.language_selector = QComboBox()
         self.language_selector.addItem("Spanish")
@@ -44,11 +44,20 @@ class LanguageDownloadWindow(QDialog):
             QMessageBox.information(self, "Folder Selected", f"Selected folder: {folder_path}")
             self.selected_folder = folder_path
             self.download_button.setEnabled(True)
+            self.label.setText(f"Select language to download:\nSelected folder: {folder_path}")
 
     def download_language(self):
         if hasattr(self, 'selected_folder'):
             selected_language = self.language_selector.currentText()
             print(f"Downloading language: {selected_language} to folder: {self.selected_folder}")
-            # Aquí agregarías la lógica para descargar el idioma seleccionado y guardar en la carpeta elegida
         else:
             QMessageBox.warning(self, "No Folder Selected", "Please select a folder before downloading.")
+
+if __name__ == "__main__":
+    import sys
+    from PyQt5.QtWidgets import QApplication
+
+    app = QApplication(sys.argv)
+    window = LanguageDownloadWindow()
+    window.show()
+    sys.exit(app.exec_())
