@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton, QHBoxLayout, QFileDialog
+from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton, QHBoxLayout, QFileDialog, QMessageBox
 
 class LanguageDownloadWindow(QDialog):
     def __init__(self):
@@ -20,17 +20,20 @@ class LanguageDownloadWindow(QDialog):
         button_layout = QHBoxLayout()
         button_layout.addWidget(self.language_selector)
 
-        download_button = QPushButton("Download")
-        download_button.clicked.connect(self.show_file_dialog)
-        button_layout.addWidget(download_button)
+        select_folder_button = QPushButton("Select Folder")
+        select_folder_button.clicked.connect(self.show_file_dialog)
+        button_layout.addWidget(select_folder_button)
+
+        self.download_button = QPushButton("Download")
+        self.download_button.setEnabled(False)
+        self.download_button.clicked.connect(self.download_language)
+        button_layout.addWidget(self.download_button)
 
         layout.addLayout(button_layout)
 
         self.setLayout(layout)
 
     def show_file_dialog(self):
-        selected_language = self.language_selector.currentText()
-
         options = QFileDialog.Options()
         options |= QFileDialog.ShowDirsOnly
         default_folder = "./PhotoVoyage-main"
@@ -38,3 +41,14 @@ class LanguageDownloadWindow(QDialog):
 
         if folder_path:
             print(f"Selected folder: {folder_path}")
+            QMessageBox.information(self, "Folder Selected", f"Selected folder: {folder_path}")
+            self.selected_folder = folder_path
+            self.download_button.setEnabled(True)
+
+    def download_language(self):
+        if hasattr(self, 'selected_folder'):
+            selected_language = self.language_selector.currentText()
+            print(f"Downloading language: {selected_language} to folder: {self.selected_folder}")
+            # Aquí agregarías la lógica para descargar el idioma seleccionado y guardar en la carpeta elegida
+        else:
+            QMessageBox.warning(self, "No Folder Selected", "Please select a folder before downloading.")
