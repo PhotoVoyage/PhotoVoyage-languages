@@ -1,9 +1,9 @@
 import sys
 import markdown
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QTextBrowser, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QTextBrowser, QMessageBox, QWidget
+from menu import create_menu
 
-
-class MiVentana(QWidget):
+class MiVentana(QMainWindow):
     def __init__(self):
         super().__init__()
 
@@ -13,8 +13,11 @@ class MiVentana(QWidget):
         self.setGeometry(100, 100, 600, 400)
         self.setWindowTitle('PhotoVoyage languages')
 
-        layout = QVBoxLayout(self)
+        layout = QVBoxLayout()
         
+        # Add the menu to the window
+        create_menu(self)
+
         # Upload Markdown content from the file
         try:
             with open('introduction-app.md', 'r', encoding='utf-8') as file:
@@ -27,12 +30,15 @@ class MiVentana(QWidget):
         html_content = markdown.markdown(markdown_content)
 
         # Display HTML content in a QTextBrowser
-        text_browser = QTextBrowser(self)
+        text_browser = QTextBrowser()
         text_browser.setOpenExternalLinks(True)
         text_browser.setHtml(html_content)
 
         layout.addWidget(text_browser)
-        self.setLayout(layout)
+
+        central_widget = QWidget()
+        central_widget.setLayout(layout)
+        self.setCentralWidget(central_widget)
 
 
 if __name__ == '__main__':
