@@ -1,7 +1,58 @@
 import sys
 import markdown
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QTextBrowser, QMessageBox, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QTextBrowser, QMessageBox, QWidget, QAction, QDialog, QLabel, QLineEdit, QPushButton
 from menu import create_menu
+import uuid
+import hashlib
+
+class LicenseDialog(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle('Enter License')
+        self.initUI()
+
+    def initUI(self):
+        layout = QVBoxLayout()
+
+        label = QLabel('Enter License Key:')
+        self.license_edit = QLineEdit()
+        layout.addWidget(label)
+        layout.addWidget(self.license_edit)
+
+        submit_button = QPushButton('Submit')
+        submit_button.clicked.connect(self.submitLicense)
+        layout.addWidget(submit_button)
+
+        generate_button = QPushButton('Generate License')
+        generate_button.clicked.connect(self.generateLicense)
+        layout.addWidget(generate_button)
+
+        self.setLayout(layout)
+
+    def submitLicense(self):
+        license_key = self.license_edit.text()
+        # Here you should validate the license key.
+        # For simplicity, let's assume the license key is valid if it's not empty.
+        if license_key:
+            self.accept()
+        else:
+            QMessageBox.warning(self, 'Invalid License', 'Please enter a valid license key.')
+
+    def generateLicense(self):
+        license_key = generate_license_key()
+        self.license_edit.setText(license_key)
+
+def generate_license_key():
+    # Genera un UUID único
+    unique_id = str(uuid.uuid4())
+
+    # Aplica una función hash a UUID para obtener una clave más corta
+    hashed_id = hashlib.sha256(unique_id.encode()).hexdigest()
+
+    # Formatea la clave para que sea más legible o con un formato específico si lo deseas
+    formatted_key = '-'.join(hashed_id[i:i+4] for i in range(0, len(hashed_id), 4))
+
+    return formatted_key
 
 class MiVentana(QMainWindow):
     def __init__(self):
@@ -14,7 +65,7 @@ class MiVentana(QMainWindow):
         self.setWindowTitle('PhotoVoyage languages')
 
         layout = QVBoxLayout()
-        
+
         # Add the menu to the window
         create_menu(self)
 
@@ -40,6 +91,11 @@ class MiVentana(QMainWindow):
         central_widget.setLayout(layout)
         self.setCentralWidget(central_widget)
 
+        # Prompt for license key
+        license_dialog = LicenseDialog(self)
+        if license_dialog.exec_() == QDialog.Accepted:
+            # User entered a valid license key
+            print("License validated. Allowing access...")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
