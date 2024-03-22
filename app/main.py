@@ -34,13 +34,18 @@ class LicenseDialog(QDialog):
         # Here you should validate the license key.
         # For simplicity, let's assume the license key is valid if it's not empty.
         if license_key:
-            self.accept()
+            # Aquí deberías comparar la clave ingresada con la clave generada
+            if license_key == MiVentana.generated_license_key:
+                self.accept()
+            else:
+                QMessageBox.warning(self, 'Invalid License', 'Please enter a valid license key.')
         else:
             QMessageBox.warning(self, 'Invalid License', 'Please enter a valid license key.')
 
     def generateLicense(self):
-        license_key = generate_license_key()
-        self.license_edit.setText(license_key)
+        # Generar la clave y almacenarla en la variable de clase
+        MiVentana.generated_license_key = generate_license_key()
+        self.license_edit.setText(MiVentana.generated_license_key)  # Mostrar la clave generada en el campo de texto
 
 def generate_license_key():
     # Genera un UUID único
@@ -55,6 +60,8 @@ def generate_license_key():
     return formatted_key
 
 class MiVentana(QMainWindow):
+    generated_license_key = None  # Variable de clase para almacenar la clave generada
+
     def __init__(self):
         super().__init__()
 
@@ -96,6 +103,7 @@ class MiVentana(QMainWindow):
         if license_dialog.exec_() == QDialog.Accepted:
             # User entered a valid license key
             print("License validated. Allowing access...")
+            self.close()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
