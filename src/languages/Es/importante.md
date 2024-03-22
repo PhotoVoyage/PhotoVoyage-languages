@@ -1,3 +1,5 @@
+<img align=center src="https://raw.githubusercontent.com/PhotoVoyage/PhotoVoyage-languages/master/.github/assets/spanish-banner.png">
+
 # Requisitos para Contribuir con Traducciones
 
 ¡Hey! Si quieres ayudar con las traducciones, aquí te dejamos algunos requisitos relajados:
