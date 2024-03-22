@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton, QHBoxLayout
+from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton, QHBoxLayout, QFileDialog
 
 class LanguageDownloadWindow(QDialog):
     def __init__(self):
@@ -21,15 +21,20 @@ class LanguageDownloadWindow(QDialog):
         button_layout.addWidget(self.language_selector)
 
         download_button = QPushButton("Download")
-        download_button.clicked.connect(self.download_language)
+        download_button.clicked.connect(self.show_file_dialog)
         button_layout.addWidget(download_button)
 
         layout.addLayout(button_layout)
 
         self.setLayout(layout)
 
-    def download_language(self):
+    def show_file_dialog(self):
         selected_language = self.language_selector.currentText()
-        # Aquí agregarías la lógica para descargar el idioma seleccionado
-        print(f"Downloading language: {selected_language}")
-        self.close()
+
+        options = QFileDialog.Options()
+        options |= QFileDialog.ShowDirsOnly
+        default_folder = "./PhotoVoyage-main"
+        folder_path = QFileDialog.getExistingDirectory(self, "Select Directory", default_folder, options=options)
+
+        if folder_path:
+            print(f"Selected folder: {folder_path}")
