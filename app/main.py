@@ -20,7 +20,7 @@ class MiVentana(QMainWindow):
 
         # Upload Markdown content from the file
         try:
-            with open('introduction-app.md', 'r', encoding='utf-8') as file:
+            with open('md/introduction-app.md', 'r', encoding='utf-8') as file:
                 markdown_content = file.read()
         except FileNotFoundError:
             QMessageBox.critical(self, 'Error', 'The "introduction-app.md" file was not found.')
