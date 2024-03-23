@@ -1,6 +1,7 @@
 import sys
 import os
 import requests
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QMessageBox
 
 class JapaneseGenerator(QWidget):
@@ -9,6 +10,8 @@ class JapaneseGenerator(QWidget):
 
         self.setWindowTitle("日本語ダウンロード")
         self.setGeometry(100, 100, 300, 400)
+        icon = QIcon("ico/161897722.ico")
+        self.setWindowIcon(icon)
 
         layout = QVBoxLayout()
 
