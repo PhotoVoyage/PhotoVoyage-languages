@@ -2,6 +2,7 @@ import sys
 import markdown
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QTextBrowser, QMessageBox, QWidget, QAction, QDialog, QLabel, QLineEdit, QPushButton
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QIcon
 from menu import create_menu
 import uuid
 import hashlib
@@ -12,6 +13,8 @@ class LicenseDialog(QDialog):
         self.setWindowTitle('Enter License')
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowCloseButtonHint)
         self.initUI()
+        icon = QIcon("ico/161897722.ico")
+        self.setWindowIcon(icon)
 
     def initUI(self):
         layout = QVBoxLayout()
@@ -73,6 +76,9 @@ class MiVentana(QMainWindow):
     def initUI(self):
         self.setGeometry(100, 100, 600, 400)
         self.setWindowTitle('PhotoVoyage languages')
+        icon1 = QIcon("ico/161897722.ico")
+        self.setWindowIcon(icon1)
+
 
         layout = QVBoxLayout()
 
