@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhotoVoyage - Iniciar sesión</title>
+    <link rel="stylesheet" href="/public/login.css">
+    <link rel="shortcut icon" href="/ico/photoVoyager-ico-generate.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <h2>Iniciar sesión</h2>
+        <% if (message) { %>
+            <p><%= message %></p>
+        <% } %>
+        <form action="/login" method="POST">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <button type="submit">Iniciar sesión</button>
+        </form>        
+    </div>
+</body>
+</html>
