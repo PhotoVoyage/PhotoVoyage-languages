@@ -1,6 +1,7 @@
 import sys
 import markdown
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QTextBrowser, QMessageBox, QWidget, QAction, QDialog, QLabel, QLineEdit, QPushButton
+from PyQt5.QtCore import Qt
 from menu import create_menu
 import uuid
 import hashlib
@@ -9,6 +10,7 @@ class LicenseDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle('Enter License')
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowCloseButtonHint)
         self.initUI()
 
     def initUI(self):
