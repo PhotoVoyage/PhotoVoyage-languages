@@ -23,7 +23,7 @@ class RussianGenerator(QWidget):
         self.setLayout(layout)
 
     def generate_word_list(self):
-        words = ["Привет", "Мир", "Кошка", "Собака", "Дом"]
+        words = ["NONE ❌"]
 
         for word in words:
             self.word_list.addItem(word)
