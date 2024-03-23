@@ -1,11 +1,12 @@
 # Spanish-gen.py
 
 import sys
+import os
 import requests
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QMessageBox
 
 class SpanishGenerator(QWidget):
-    def __init__(self):
+    def __init__(self, folder_path):  # Añade folder_path como argumento
         super().__init__()
 
         self.setWindowTitle("Descargar Archivos")
@@ -27,6 +28,8 @@ class SpanishGenerator(QWidget):
 
         self.setLayout(layout)
 
+        self.folder_path = folder_path  # Guarda la ruta seleccionada
+
     def generate_word_list(self):
         palabras = ["404.ejs", "error.ejs", "login.ejs"]
 
@@ -40,7 +43,8 @@ class SpanishGenerator(QWidget):
             url = f"https://raw.githubusercontent.com/PhotoVoyage/PhotoVoyage-languages/main/src/languages/Es/{file_name}"
             response = requests.get(url)
             if response.status_code == 200:
-                with open(file_name, 'wb') as f:
+                local_path = os.path.join(self.folder_path, file_name)  # Utiliza la ruta seleccionada
+                with open(local_path, 'wb') as f:
                     f.write(response.content)
                 QMessageBox.information(self, "Descarga Exitosa", f"El archivo '{file_name}' se ha descargado exitosamente.")
             else:
@@ -50,6 +54,7 @@ class SpanishGenerator(QWidget):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = SpanishGenerator()
+    folder_path = sys.argv[1]  # Recibe la ruta seleccionada como argumento
+    window = SpanishGenerator(folder_path)
     window.show()
     sys.exit(app.exec_())
