@@ -60,7 +60,7 @@ class LanguageDownloadWindow(QDialog):
 
             script_path = os.path.join("download", script_name)
             if os.path.exists(script_path):
-                subprocess.Popen(["python", script_path])
+                subprocess.Popen(["python", script_path, self.selected_folder])
             else:
                 QMessageBox.warning(self, "File Not Found", f"The script file {script_name} was not found.")
         else:
