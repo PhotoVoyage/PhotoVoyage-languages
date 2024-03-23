@@ -1,4 +1,6 @@
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton, QHBoxLayout, QFileDialog, QMessageBox
+import subprocess
+import os
 
 class LanguageDownloadWindow(QDialog):
     def __init__(self):
@@ -40,7 +42,6 @@ class LanguageDownloadWindow(QDialog):
         folder_path = QFileDialog.getExistingDirectory(self, "Select Directory", default_folder, options=options)
 
         if folder_path:
-            print(f"Selected folder: {folder_path}")
             QMessageBox.information(self, "Folder Selected", f"Selected folder: {folder_path}")
             self.selected_folder = folder_path
             self.download_button.setEnabled(True)
@@ -49,7 +50,19 @@ class LanguageDownloadWindow(QDialog):
     def download_language(self):
         if hasattr(self, 'selected_folder'):
             selected_language = self.language_selector.currentText()
-            print(f"Downloading language: {selected_language} to folder: {self.selected_folder}")
+            script_name = ""
+            if selected_language == "Spanish":
+                script_name = "Spanish-gen.py"
+            elif selected_language == "Japanese":
+                script_name = "Japanese-gen.py"
+            elif selected_language == "Russian":
+                script_name = "Russian-gen.py"
+
+            script_path = os.path.join("download", script_name)
+            if os.path.exists(script_path):
+                subprocess.Popen(["python", script_path])
+            else:
+                QMessageBox.warning(self, "File Not Found", f"The script file {script_name} was not found.")
         else:
             QMessageBox.warning(self, "No Folder Selected", "Please select a folder before downloading.")
 
