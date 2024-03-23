@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton, QHBoxLayout, QFileDialog, QMessageBox
 import subprocess
 import os
+from PyQt5.QtGui import QIcon
 
 class LanguageDownloadWindow(QDialog):
     def __init__(self):
@@ -8,6 +9,8 @@ class LanguageDownloadWindow(QDialog):
 
         self.setWindowTitle("Download Language")
         self.setGeometry(100, 100, 300, 150)
+        icon = QIcon("ico/161897722.ico")
+        self.setWindowIcon(icon)
 
         layout = QVBoxLayout(self)
 
