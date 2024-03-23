@@ -1,5 +1,5 @@
 @echo off
-echo Please allow 5 seconds to generate the license:
+echo Please allow 8 seconds to generate the license:
 echo.
 echo    ________  ____________  ___________   ________  ___       __   __
 echo   /  _____/ /  _____/\   \/  /\_____  \  \_____  \ \  \     /  /  /  \
@@ -8,7 +8,7 @@ echo  \    \_\  \  \_\  \   /     \ /       \  /       \   \  \/  /  /    /
 echo   \______  /\______  /\___   //______  / /______  /    \____/   \____/
 echo          \/        \/     \_/        \/         \/                    
 echo.
-timeout /t 5 >nul
+timeout /t 8 >nul
 cls
 echo.
 echo MIT License
