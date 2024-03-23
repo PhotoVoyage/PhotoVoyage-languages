@@ -4,6 +4,7 @@ import sys
 import os
 import requests
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QMessageBox
+from PyQt5.QtGui import QIcon
 
 class SpanishGenerator(QWidget):
     def __init__(self, folder_path):  # Añade folder_path como argumento
@@ -11,6 +12,8 @@ class SpanishGenerator(QWidget):
 
         self.setWindowTitle("Descargar Archivos")
         self.setGeometry(100, 100, 300, 400)
+        icon = QIcon("ico/161897722.ico")
+        self.setWindowIcon(icon)
 
         layout = QVBoxLayout()
 
