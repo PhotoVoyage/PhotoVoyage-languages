@@ -4,6 +4,7 @@ import os
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QTextBrowser
 from PyQt5.QtGui import QImage, QPixmap, QDesktopServices
 from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QIcon
 
 class CreditsWindow(QDialog):
     def __init__(self, markdown_file_path):
@@ -11,6 +12,8 @@ class CreditsWindow(QDialog):
 
         self.setWindowTitle("Credits")
         self.setGeometry(100, 100, 600, 400)
+        icon = QIcon("ico/161897722.ico")
+        self.setWindowIcon(icon)
 
         layout = QVBoxLayout(self)
 
