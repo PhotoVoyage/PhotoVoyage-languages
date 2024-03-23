@@ -46,6 +46,7 @@ class LicenseDialog(QDialog):
         # Generar la clave y almacenarla en la variable de clase
         MiVentana.generated_license_key = generate_license_key()
         self.license_edit.setText(MiVentana.generated_license_key)  # Mostrar la clave generada en el campo de texto
+        QMessageBox.information(self, 'New License Generated', 'A new license has been generated. Remember, licenses are for one-time use only.')
 
 def generate_license_key():
     # Genera un UUID único
