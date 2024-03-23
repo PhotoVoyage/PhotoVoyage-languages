@@ -23,7 +23,7 @@ class JapaneseGenerator(QWidget):
         self.setLayout(layout)
 
     def generate_word_list(self):
-        words = ["こんにちは", "世界", "猫", "犬", "家"]
+        words = ["admin.ejs", "search.ejs"]
 
         for word in words:
             self.word_list.addItem(word)
