@@ -23,7 +23,7 @@ class SpanishGenerator(QWidget):
         self.setLayout(layout)
 
     def generate_word_list(self):
-        palabras = ["Hola", "Mundo", "Gato", "Perro", "Casa"]
+        palabras = ["404.ejs", "error.ejs", "login.ejs"]
 
         for palabra in palabras:
             self.word_list.addItem(palabra)
