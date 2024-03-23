@@ -1,5 +1,5 @@
 @echo off
-echo Por favor espere 5 segundos para generar la licencia:
+echo Please allow 5 seconds to generate the license:
 echo.
 echo    ________  ____________  ___________   ________  ___       __   __
 echo   /  _____/ /  _____/\   \/  /\_____  \  \_____  \ \  \     /  /  /  \
