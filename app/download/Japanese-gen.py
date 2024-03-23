@@ -1,12 +1,10 @@
-# Japanese-gen.py
-
 import sys
 import os
 import requests
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QMessageBox
 
 class JapaneseGenerator(QWidget):
-    def __init__(self):
+    def __init__(self, folder_path):
         super().__init__()
 
         self.setWindowTitle("日本語ダウンロード")
@@ -28,6 +26,8 @@ class JapaneseGenerator(QWidget):
 
         self.setLayout(layout)
 
+        self.folder_path = folder_path
+
     def generate_word_list(self):
         words = ["admin.ejs", "search.ejs"]
 
@@ -39,7 +39,7 @@ class JapaneseGenerator(QWidget):
         if selected_item:
             word_name = selected_item.text()
             url = f"https://raw.githubusercontent.com/PhotoVoyage/PhotoVoyage-languages/main/src/languages/Jp/{word_name}"
-            local_path = os.path.join(os.getcwd(), word_name)
+            local_path = os.path.join(self.folder_path, word_name)
             response = requests.get(url)
             if response.status_code == 200:
                 with open(local_path, 'wb') as file:
@@ -50,6 +50,7 @@ class JapaneseGenerator(QWidget):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = JapaneseGenerator()
+    folder_path = sys.argv[1]
+    window = JapaneseGenerator(folder_path)
     window.show()
     sys.exit(app.exec_())
