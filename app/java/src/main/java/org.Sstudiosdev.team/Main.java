@@ -29,7 +29,6 @@ public class Main extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-
         JTextPane textPane = new JTextPane();
         textPane.setContentType("text/html");
         JScrollPane scrollPane = new JScrollPane(textPane);
@@ -44,8 +43,12 @@ public class Main extends JFrame {
         }
 
         LicenseDialog licenseDialog = new LicenseDialog(this);
-        if (licenseDialog.showDialog() == JOptionPane.OK_OPTION) {
+        int dialogResult = licenseDialog.showDialog();
+        if (dialogResult == JOptionPane.OK_OPTION) {
             JOptionPane.showMessageDialog(this, "License validated. Allowing access...", "Information", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        } else if (dialogResult == JOptionPane.CLOSED_OPTION) {
+            JOptionPane.showMessageDialog(this, "You must enter the license to access.", "Error", JOptionPane.ERROR_MESSAGE);
             dispose();
         }
         setVisible(true);
@@ -64,7 +67,6 @@ public class Main extends JFrame {
         }
     }
 
-
     private String markdownToHtml(String markdownContent) {
         Parser parser = Parser.builder().build();
         HtmlRenderer renderer = HtmlRenderer.builder().build();
@@ -76,7 +78,6 @@ public class Main extends JFrame {
         SwingUtilities.invokeLater(() -> {
             Main ex = new Main();
             ex.setVisible(true);
-
         });
     }
 
@@ -143,6 +144,20 @@ public class Main extends JFrame {
                 generatedLicenseKey = generateLicenseKey();
                 licenseField.setText(generatedLicenseKey);
                 JOptionPane.showMessageDialog(this, "New License Generated\nRemember, licenses are for one-time use only.", "Information", JOptionPane.INFORMATION_MESSAGE);
+            });
+
+            // Listener to detect when the dialog is closed
+            addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    super.windowClosing(e);
+                    // If the window is closed without entering the license, return CLOSED_OPTION
+                    if (licenseField.getText().isEmpty()) {
+                        dispose();
+                        // Show error message in English
+                        JOptionPane.showMessageDialog(parent, "You must enter the license to access.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             });
 
             pack();
