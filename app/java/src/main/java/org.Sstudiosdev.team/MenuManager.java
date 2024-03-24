@@ -50,8 +50,8 @@ public class MenuManager {
     }
 
     private static void showLanguageDownload(JFrame parent) {
-        // Implement LanguageDownloadWindow class accordingly
-        // LanguageDownloadWindow languageDownloadWindow = new LanguageDownloadWindow();
-        // languageDownloadWindow.setVisible(true);
+        LanguageDownloadWindow languageDownloadWindow = new LanguageDownloadWindow();
+        languageDownloadWindow.setVisible(true);
     }
+
 }
