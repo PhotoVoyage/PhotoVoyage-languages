@@ -53,6 +53,7 @@ public class Main extends JFrame {
             dispose();
         }
         setVisible(true);
+        MenuManager.createMenu(this);
     }
 
     private String loadMarkdownContent(String filePath) throws IOException {
