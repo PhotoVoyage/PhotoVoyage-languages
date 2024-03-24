@@ -2,7 +2,10 @@ package org.Sstudiosdev.team;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.*;
@@ -58,8 +61,18 @@ public class Main extends JFrame {
     }
 
     private String loadMarkdownContent(String filePath) throws IOException {
-        return Files.readString(Path.of(filePath));
+        try (InputStream inputStream = getClass().getResourceAsStream(filePath);
+             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+             BufferedReader reader = new BufferedReader(inputStreamReader)) {
+            StringBuilder content = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+            return content.toString();
+        }
     }
+
 
     private String markdownToHtml(String markdownContent) {
         // Convert Markdown to HTML here
