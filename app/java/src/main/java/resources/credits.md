@@ -11,3 +11,4 @@ Our heartfelt thanks to everyone who has contributed to the project! Your ideas,
 <a href="https://github.com/Sstudiosdev"><img src="https://avatars.githubusercontent.com/u/149289426?v=4" height="128" width="128" /></a>
 <a href="https://github.com/StaffV77"><img src="https://avatars.githubusercontent.com/u/107765373?v=4" height="128" width="128" /></a>
 <a href="https://github.com/photovoyagehelp"><img src="https://avatars.githubusercontent.com/u/164266627?v=4" height="128" width="128" /></a>
+<a href="https://github.com/staFF6773"><img src="https://avatars.githubusercontent.com/u/108166164?v=4" height="128" width="128" /></a>
