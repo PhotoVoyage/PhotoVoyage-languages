@@ -56,7 +56,7 @@ public class LanguageDownloadWindow extends JFrame {
         panel.add(centerPanel, BorderLayout.CENTER);
         add(panel);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 
