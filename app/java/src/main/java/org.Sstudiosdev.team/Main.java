@@ -11,6 +11,9 @@ import java.nio.file.Path;
 import java.security.*;
 import java.util.UUID;
 import javax.swing.*;
+import com.vladsch.flexmark.parser.*;
+import com.vladsch.flexmark.html.*;
+import com.vladsch.flexmark.util.ast.Node;
 
 public class Main extends JFrame {
     private static String generatedLicenseKey = null;
@@ -26,7 +29,6 @@ public class Main extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        createMenu();
 
         JTextPane textPane = new JTextPane();
         textPane.setContentType("text/html");
@@ -46,18 +48,7 @@ public class Main extends JFrame {
             JOptionPane.showMessageDialog(this, "License validated. Allowing access...", "Information", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         }
-    }
-
-    private void createMenu() {
-        JMenuBar menubar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
-        JMenuItem exitMenuItem = new JMenuItem("Exit");
-        exitMenuItem.addActionListener((ActionEvent event) -> {
-            System.exit(0);
-        });
-        fileMenu.add(exitMenuItem);
-        menubar.add(fileMenu);
-        setJMenuBar(menubar);
+        setVisible(true);
     }
 
     private String loadMarkdownContent(String filePath) throws IOException {
@@ -75,14 +66,17 @@ public class Main extends JFrame {
 
 
     private String markdownToHtml(String markdownContent) {
-        // Convert Markdown to HTML here
-        return markdownContent;
+        Parser parser = Parser.builder().build();
+        HtmlRenderer renderer = HtmlRenderer.builder().build();
+        Node document = parser.parse(markdownContent);
+        return renderer.render(document);
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Main ex = new Main();
             ex.setVisible(true);
+
         });
     }
 
