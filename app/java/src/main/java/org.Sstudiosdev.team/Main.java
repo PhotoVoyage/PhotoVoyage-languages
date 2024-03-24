@@ -31,6 +31,7 @@ public class Main extends JFrame {
 
         JTextPane textPane = new JTextPane();
         textPane.setContentType("text/html");
+        textPane.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textPane);
         add(scrollPane, BorderLayout.CENTER);
 
