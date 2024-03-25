@@ -44,9 +44,8 @@ public class MenuManager {
     }
 
     private static void showCredits(JFrame parent) {
-        // Implement CreditsWindow class accordingly
-        // CreditsWindow creditsWindow = new CreditsWindow("md/credits.md");
-        // creditsWindow.setVisible(true);
+        CreditsWindow creditsWindow = new CreditsWindow();
+        creditsWindow.setVisible(true);
     }
 
     private static void showLanguageDownload(JFrame parent) {
